@@ -1,0 +1,54 @@
+@{
+    Layout = "_LayoutManager";
+}
+
+<style>
+
+  body {
+    background-color: #EBF5FB;
+    }
+</style>
+@{var get = ViewBag.Room;}
+<br><br>
+        <h2 class="text-center" style="color:#FF5693; font-size:33px">Room List</h2>
+<br><br>
+<button class="btn btn-success" onclick="location.href='/Manager/AddRoom'">New Room</button>
+<table style="background:white; margin-top:5px; padding-left:15px; box-shadow: 1px 1px 10px #5499C7;" class="table table-hover text-left" id="customers">
+<thead class="thead-dark">
+  <tr>
+    <th>Room Number</th>
+    <th>Class</th>
+    <th>Status</th>
+    <th>Facilities</th>
+    <th>Description</th>
+    <th></th>
+  </tr>
+</thead>
+ @{
+ foreach (var a in get){
+  <tr>
+    <td>@a.Number</td>
+    <td>@a.Class</td>
+    <td>@a.Status</td>
+    <td>@a.Facilities</td>
+    <td>@a.Description</td>
+    <td><button  class="btn btn-success" id="btn-@a.Id" onclick="javascript:Edit(this)">Edit</button> <button id="btn-@a.Id" onclick="javascript:Remove(this)" class="btn btn-danger">Remove</button></td>
+  </tr> }}
+</table>
+
+<script type="text/javascript">
+function Edit(btn)
+{
+    var get = btn.id;
+    Id = get.substring(4,get.Length);
+    location.href='/Manager/EditRoom?Id='+Id;
+}
+
+function Remove(btn)
+{
+    var get = btn.id;
+    Id = get.substring(4,get.Length);
+    location.href='/Manager/Remove?Id='+Id;
+}
+
+</script>
