@@ -1,0 +1,44 @@
+@{
+    Layout = "_LayoutOfficer";
+}
+
+<style>
+
+  body {
+    background-color: #EBF5FB;
+    }
+</style>
+@{var get = ViewBag.Transaction;}
+<br><br>
+        <h2 class="text-center" style="color:#FF5693; font-size:33px">Guest List</h2>
+<br><br>
+<table style="background:white; margin-top:5px; padding-left:15px; box-shadow: 1px 1px 10px #5499C7;" class="table table-hover text-left" id="customers">
+<thead class="thead-dark">
+  <tr>
+    <th>Name</th>
+    <th>Room Number</th>
+    <th>Date In</th>
+    <th>Date Out</th>
+    <th></th>
+  </tr>
+</thead>
+ @{
+ foreach (var a in get){
+  <tr>
+    <td>@a.Name</td>
+    <td>@a.RoomNumber</td>
+    <td>@a.checkin</td>
+    <td>@a.checkout</td>
+    <td><button  class="btn btn-success" id="btn-@a.Id" onclick="javascript:Detail(this)">Detail</button></td>
+  </tr> }}
+</table>
+
+<script type="text/javascript">
+function Detail(btn)
+{
+    var get = btn.id;
+    Id = get.substring(4,get.Length);
+    location.href='/Officer/Detail?Id='+Id;
+}
+
+</script>

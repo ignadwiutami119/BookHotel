@@ -295,7 +295,7 @@ input[type="file"] {
         <h2 class="text-center" style="color:#FF5693; font-size:33px">Account</h2>
 <br><br>
 <div class="container">
-
+<button class="btn btn-success" onclick="location.href='/Admin/AddAccount'">New Account</button>
 
        <div class="col-lg-12 col-sm-5">
              <div class="card hovercard">
@@ -303,13 +303,22 @@ input[type="file"] {
                         @{ var pg = ViewBag.page;
                         if(pg.StatusPage == "Manager"){
                     <ul> 
-                        <li style="width:555px"><a style="background:#FF5693; color:#F0F9FF" href="/Admin/ManageAccount?status=Manager">Manager</a></li>
-                        <li style="width:555px"><a style="color:#F0F9FF" href="/Admin/ManageAccount?status=Officer">Officer</a></li>
+                        <li style="width:370px"><a style="background:#FF5693; color:#F0F9FF" href="/Admin/ManageAccount?status=Manager">Manager</a></li>
+                        <li style="width:370px"><a style="color:#F0F9FF" href="/Admin/ManageAccount?status=Officer">Officer</a></li>
+                        <li style="width:370px"><a style="color:#F0F9FF" href="/Admin/ManageAccount?status=Admin">Admin</a></li>
                     </ul>}
+                    else if(pg.StatusPage == "Officer"){
+                    <ul> 
+                        <li style="width:370px"><a style="color:#F0F9FF" href="/Admin/ManageAccount?status=Manager">Manager</a></li>
+                        <li style="width:370px"><a style="background:#FF5693; color:#F0F9FF" href="/Admin/ManageAccount?status=Officer">Officer</a></li>
+                        <li style="width:370px"><a style="color:#F0F9FF" href="/Admin/ManageAccount?status=Admin">Admin</a></li>
+                    </ul>
+                    }
                     else{
                     <ul> 
-                        <li style="width:555px"><a style="color:#F0F9FF" href="/Admin/ManageAccount?status=Manager">Manager</a></li>
-                        <li style="width:555px"><a style="background:#FF5693; color:#F0F9FF" href="/Admin/ManageAccount?status=Officer">Officer</a></li>
+                        <li style="width:370px"><a style="color:#F0F9FF" href="/Admin/ManageAccount?status=Manager">Manager</a></li>
+                        <li style="width:370px"><a style="color:#F0F9FF" href="/Admin/ManageAccount?status=Officer">Officer</a></li>
+                        <li style="width:370px"><a style="background:#FF5693; color:#F0F9FF" href="/Admin/ManageAccount?status=Admin">Admin</a></li>
                     </ul>
                     }
                     }
@@ -338,8 +347,9 @@ input[type="file"] {
     <tr>
       <th scope="col">Name</th>
       <th scope="col">Email</th>
+      <th scope="col">Phone</th>
       <th scope="col">NIP</th>
-      <th scope="col">Occupation</th>
+      <th scope="col">Status</th>
       <th scope="col"></th>
     </tr>
   </thead>    
@@ -351,14 +361,15 @@ input[type="file"] {
                 <td class="text-left">@a.Email</td>
                 <td class="text-left">@a.Phone</td>
                 <td class="text-left">@a.NIP</td>
-                <td class="text-center"><button class="btn btn-success">Set as Officer</button></td>
+                <td class="text-left">@a.Status</td>
+                <td class="text-right"><button class="btn btn-success" id="btn-@a.Id" onclick="javascript:Officer(this)">Set as Officer</button>  <button class="btn btn-success" id="btn-@a.Id" onclick="javascript:Admin(this)">Set as Admin</button>  <button class="btn btn-danger" id="btn-@a.Id" onclick="javascript:Remove(this)">Remove</button></td>
             </tr> 
             } 
     }
  </tbody> 
     </table> }
             
-    else {
+    else if(page.StatusPage == "Officer"){
     <table style="background:white;" class="table table-hover text-left"> 
             <tbody>
    @{var items = ViewBag.Officer;
@@ -367,8 +378,9 @@ input[type="file"] {
     <tr>
       <th scope="col">Name</th>
       <th scope="col">Email</th>
+      <th scope="col">Phone</th>
       <th scope="col">NIP</th>
-      <th scope="col">Occupation</th>
+      <th scope="col">Status</th>
       <th scope="col"></th>
     </tr>
   </thead>    
@@ -380,12 +392,45 @@ input[type="file"] {
                 <td class="text-left">@a.Email</td>
                 <td class="text-left">@a.Phone</td>
                 <td class="text-left">@a.NIP</td>
-                <td class="text-center"><button class="btn btn-success">Set as Manager</button></td>
+                <td class="text-left">@a.Status</td>
+                <td class="text-right"><button class="btn btn-success" id="btn-@a.Id" onclick="javascript:Manager(this)">Set as Manager</button>  <button class="btn btn-success" id="btn-@a.Id" onclick="javascript:Admin(this)">Set as Admin</button>  <button class="btn btn-danger" id="btn-@a.Id" onclick="javascript:Remove(this)">Remove</button></td>
             </tr> 
             } 
     }
  </tbody> 
     </table> }
+
+    else{
+        <table style="background:white;" class="table table-hover text-left"> 
+            <tbody>
+   @{var items = ViewBag.Admin;
+    <br>
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Phone</th>
+      <th scope="col">NIP</th>
+      <th scope="col">Status</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>    
+    foreach(var a in items) { 
+            <tr>
+        <input type="hidden"  id="Id-@a.Id" value="@a.Id">
+                @* <td><img style="width:17%" src="@a.Image"></td> *@
+                <td><b>@a.FullName</b></td>
+                <td class="text-left">@a.Email</td>
+                <td class="text-left">@a.Phone</td>
+                <td class="text-left">@a.NIP</td>
+                <td class="text-left">@a.Status</td>
+                <td class="text-right"><button class="btn btn-success" id="btn-@a.Id" onclick="javascript:Manager(this)">Set as Manager</button>  <button class="btn btn-success" id="btn-@a.Id" onclick="javascript:Officer(this)">Set as Officer</button>  <button class="btn btn-danger" id="btn-@a.Id" onclick="javascript:Remove(this)">Remove</button></td>
+            </tr> 
+            } 
+    }
+ </tbody> 
+    </table>
+    }
                 }
 
 
@@ -426,13 +471,32 @@ input[type="file"] {
 
 
 <script type="text/javascript">
-function AttendanceDetail(btn)
+function Manager(btn)
 {
-    var id = btn.id;
-    id = id.substring(4,id.Length);
-    var identify = "Id-"+id;
-    var Id = document.getElementById(identify).value;
-    location.href='/Attendance/AttendanceList?Id='+Id;
+    var get = btn.id;
+    Id = get.substring(4,get.Length);
+    location.href='/Admin/ChangeAsManager?Id='+Id;
+}
+
+function Officer(btn)
+{
+    var get = btn.id;
+    Id = get.substring(4,get.Length);
+    location.href='/Admin/ChangeAsOfficer?Id='+Id;
+}
+
+function Admin(btn)
+{
+    var get = btn.id;
+    Id = get.substring(4,get.Length);
+    location.href='/Admin/ChangeAsAdmin?Id='+Id;
+}
+
+function Remove(btn)
+{
+     var get = btn.id;
+    Id = get.substring(4,get.Length);
+    location.href='/Admin/Remove?Id='+Id;
 }
 
 function Search()

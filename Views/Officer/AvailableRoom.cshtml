@@ -1,0 +1,61 @@
+@{
+    Layout = "_LayoutOfficer";
+}
+
+<style>
+
+  body {
+    background-color: #EBF5FB;
+    }
+</style>
+@{var get = ViewBag.Transaction;}
+<br><br>
+        <h2 class="text-center" style="color:#FF5693; font-size:33px">Available Room</h2>
+<br><br>
+<table style="background:white; margin-top:5px; padding-left:15px; box-shadow: 1px 1px 10px #5499C7;" class="table table-hover text-left" id="customers">
+<thead class="thead-dark">
+    @{var date = DateTime.Now;
+    var dt = date.ToString("dd MMMM yyyy");
+    var one = date.AddDays(1).ToString("dd MMMM yyyy");
+    var two = date.AddDays(2).ToString("dd MMMM yyyy");
+    var three = date.AddDays(3).ToString("dd MMMM yyyy");
+    var four = date.AddDays(4).ToString("dd MMMM yyyy");
+    var five = date.AddDays(5).ToString("dd MMMM yyyy");
+    var six = date.AddDays(6).ToString("dd MMMM yyyy");   
+    }
+  <tr>
+    <th></th>
+    <th>@dt</th>
+    <th>@one</th>
+    <th>@two</th>
+    <th>@three</th>
+    <th>@four</th>
+    <th>@five</th>
+    <th>@six</th>
+  </tr>
+</thead>
+ @{
+     var room = ViewBag.Room;
+     var booked = ViewBag.Booked;
+ foreach (var a in room){
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr> }}
+</table>
+
+<script type="text/javascript">
+function Detail(btn)
+{
+    var get = btn.id;
+    Id = get.substring(4,get.Length);
+    location.href='/Officer/Detail?Id='+Id;
+}
+
+</script>

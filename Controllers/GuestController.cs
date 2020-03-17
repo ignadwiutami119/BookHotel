@@ -44,6 +44,12 @@ namespace BookingHotel.Controllers {
                 Phone = phone,
                 RoomNumber = number
             };
+            var book = new Booking (){
+                In = checkin,
+                Out = checkout,
+                RoomId = number
+            };
+            _AppDbContext.Bookings.Add(book);
             _AppDbContext.Transactions.Add(obj);
             _AppDbContext.SaveChanges();
             return RedirectToAction ("Home","Guest");
