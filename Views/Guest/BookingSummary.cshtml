@@ -1,0 +1,76 @@
+
+@{
+    Layout = "_LayoutGuest";
+}
+
+@{
+    var name = ViewBag.Name;
+    var phone = ViewBag.Phone;
+    var number = ViewBag.Number;
+    var cls = ViewBag.Class;
+    var facilities = ViewBag.Facilities;
+    var checkin = ViewBag.Checkin;
+    var checkout = ViewBag.Checkout;
+    var req = ViewBag.Req;
+    var price = ViewBag.Price;
+    var range = checkout.Day - checkin.Day;
+    var total = range * Convert.ToInt32(price);
+    var dtin = checkin.ToString("dd MMMM yyyy");
+    var dtout = checkout.ToString("dd MMMM yyyy");
+}
+<br><br>
+<h3 class="text-center">Booking Summary</h3><br><br>
+<table style="background:white; margin-top:5px; padding-left:15px; box-shadow: 1px 1px 10px #5499C7;" class="table table-hover text-left" id="customers">
+  <tr>
+    <td>Name</td>
+    <td>@name</td>
+  </tr>
+  <tr>
+    <td>Phone</td>
+    <td>@phone</td>
+  </tr>
+  <tr>
+    <td>Room Number</td>
+    <td>@number</td>
+  </tr>
+  <tr>
+    <td>Class</td>
+    <td>@cls Room</td>
+  </tr>
+  <tr>
+    <td>Facilities</td>
+    <td>@facilities</td>
+  </tr>
+  <tr>
+    <td>Checkin Date</td>
+    <td>@dtin</td>
+  </tr>
+  <tr>
+    <td>Checkout Date</td>
+    <td>@dtout</td>
+  </tr>
+  <tr>
+    <td>Special Request Notes</td>
+    <td>@req</td>
+  </tr>
+  <tr>
+    <td>Price</td>
+    <td>Rp. @price / Night</td>
+  </tr>
+  <tr>
+    <td>Total Price</td>
+    <td>Rp. @total</td>
+  </tr>
+</table>
+
+<form method="POST">
+<input type="hidden" name="number" value="@number">
+<input type="hidden" name="checkin" value="@checkin">
+<input type="hidden" name="checkout" value="@checkout">
+<input type="hidden" name="name" value="@name">
+<input type="hidden" name="phone" value="@phone">
+<input type="hidden" name="req" value="@req">
+<input type="hidden" name="price" value="@total">
+<button class="btn btn-success" asp-action="BookRoom" asp-controller="Guest">Book Now</button>
+</form>
+<br><br><br>

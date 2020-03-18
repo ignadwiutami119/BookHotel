@@ -55,9 +55,20 @@ namespace BookingHotel.Controllers
         public IActionResult AvailableRoom()
         {
             var getRoom = from a in _AppDbContext.Rooms select a;
-            var booked = from a in _AppDbContext.Transactions select a;
             ViewBag.Room = getRoom;
-            ViewBag.Booked = booked;
+            return View();
+        }
+        public IActionResult AvailableThisMonth(int Id, string Number)
+        {   var transaction = from a in _AppDbContext.Transactions where a.RoomNumber == Number select a;
+            var getRoom = _AppDbContext.Rooms.Find(Id);
+            ViewBag.Room = getRoom;
+            ViewBag.Booked = transaction;
+            return View();
+        }
+        public IActionResult AvailableDate(int Id)
+        {
+            var getRoom = _AppDbContext.Rooms.Find(Id);
+            ViewBag.Room = getRoom;
             return View();
         }
 

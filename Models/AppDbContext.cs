@@ -5,6 +5,7 @@ namespace BookingHotel.Models
     public class AppDbContext : DbContext
     {
         public DbSet<Admin> Admins {get;set;}
+        public DbSet<Statuslogin> Statuslogin {get;set;}
         public DbSet<Room> Rooms {get;set;}
         public DbSet<Booking> Bookings {get;set;}
         public DbSet<Guest> Guests {get;set;}

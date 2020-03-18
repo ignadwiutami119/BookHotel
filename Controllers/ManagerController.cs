@@ -28,12 +28,14 @@ namespace BookingHotel.Controllers {
         public IActionResult AddRoom () {
             return View ();
         }
-        public IActionResult AddRoomData (string cls, string number, string description, string fac1, string fac2, string fac3, string fac4, string fac5, string fac6, string fac7, string fac8) {
+        public IActionResult AddRoomData (string cls, string price, string number, string description, string fac1, string fac2, string fac3, string fac4, string fac5, string fac6, string fac7, string fac8) {
             var room = new Room () {
                 Number = number,
                 Class = cls,
                 Facilities = fac1 + " " + fac2 + " " + fac3 + " " + fac4 + "\n" + fac5 + " " + fac6 + " " + fac7 + " " + fac8,
-                Description = description
+                Description = description,
+                Status = "Available",
+                Price = price
             };
             Console.WriteLine(description);
             Console.WriteLine("ini desc");
@@ -41,12 +43,14 @@ namespace BookingHotel.Controllers {
             _AppDbContext.SaveChanges ();
             return RedirectToAction ("Room", "Manager");
         }
-        public IActionResult EditRoomData (int Id, string cls, string number, string description, string fac1, string fac2, string fac3, string fac4, string fac5, string fac6, string fac7, string fac8) {
+        public IActionResult EditRoomData (int Id, string price, string cls, string status, string number, string description, string fac1, string fac2, string fac3, string fac4, string fac5, string fac6, string fac7, string fac8) {
             var room = _AppDbContext.Rooms.Find(Id);
             room.Number = number;
+            room.Status = status;
             room.Class = cls;
             room.Description = description;
             room.Facilities = fac1 + " " + fac2 + " " + fac3 + " " + fac4 + "\n" + fac5 + " " + fac6 + " " + fac7 + " " + fac8;
+            room.Price = price;
             _AppDbContext.SaveChanges ();
             return RedirectToAction ("Room", "Manager");
         }

@@ -1,0 +1,62 @@
+@{
+    Layout = "_LayoutOfficer";
+}
+<!DOCTYPE html>
+<html>
+  <style>
+    body {
+  background-color: #EBF5FB;
+         }
+  </style>
+<body>
+  <br><br>
+  @{var room = ViewBag.Room;
+  var Id = ViewBag.Id;
+  var dt = DateTime.Now;
+  var month_ = dt.ToString("MMMM yyyy");
+  <div style="margin-left: 70px;">
+  <h2>Availability Room <br>Number @room.Number</h2>
+  <p style="width:200px">On @month_</p></div>
+  }
+
+@* <button class="btn btn-success">Previous Month</button>
+<button class="btn btn-success">Next Month</button> *@
+<div class="container">
+<div style="width:1080px;margin-left:40px;margin-top:7px; margin-bottom:30px;" class=" text-center">
+  <table style="background:white" class="table text-left">
+            <tbody>
+    <br>
+    <thead class="thead-dark">
+    <tr>
+      <th class="text-center" style="background: #1F618D; color:white" scope="col">Date</th>
+      <th class="text-center" style="background: #1F618D; color:white" scope="col">Status</th>
+    </tr>
+  </thead>
+    @{
+    var book = ViewBag.Booked;
+    var items = ViewBag.items;
+    var get = DateTime.Now;
+    var get_month = get.Month;
+    var get_year = get.Year;
+    var date = new DateTime(get_year,get_month,1);
+    var get_day_number = System.DateTime.DaysInMonth(date.Year, date.Month);
+    var dateonly="";
+    for(int i=1;i<=get_day_number;i++) {
+        date = new DateTime(get_year,get_month,i);
+        var datetocheck = date.ToString("dd/MM/yyyy");
+        dateonly = date.ToString("dd-MM-yyyy");
+            <tr>
+                <td class="text-center"><b>@dateonly</b></td>
+            @{
+                foreach(var a in book){
+                if(a.checkin.Date <= date.Date && date.Date <= a.checkout.Date){
+                <td><p style="color: red;">Booked</p></td>} 
+                else{
+                <td>Available</td>
+                }} }
+            </tr> 
+            } 
+    }
+ </tbody> 
+    </table></div></div><br><br><br>
+    </body></html>

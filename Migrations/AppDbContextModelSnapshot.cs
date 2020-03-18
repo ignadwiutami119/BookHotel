@@ -187,6 +187,24 @@ namespace BookingHotel.Migrations
                     b.ToTable("Rooms");
                 });
 
+            modelBuilder.Entity("BookingHotel.Models.Statuslogin", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Statuslogin");
+                });
+
             modelBuilder.Entity("BookingHotel.Models.Transaction", b =>
                 {
                     b.Property<int>("Id")

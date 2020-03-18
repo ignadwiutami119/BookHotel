@@ -8,30 +8,44 @@
     background-color: #EBF5FB;
     }
 </style>
+<br><br>
+@{
+  var guest = ViewBag.Guest;
 
+}
 
+<div class="text-left">
+<h4>Your Saldo Balance <br> Rp. @guest.Deposit</h4>
+<a onclick="location.href='/Guest/Topup'">Top up saldo</a>
+</div>
+
+    <h3 class="text-center" style="color:#FF5693; font-size:33px">Here rooms ready for you</h3>
+<br><br>
 @{var get = ViewBag;
   var getbooked = ViewBag.RoomBooked;
   var status = ViewBag.Status;
   if(status == "filter"){
     Console.WriteLine("masuk sini ga");
     var dt = ViewBag.Date;
+    var dtout = ViewBag.Dateout;
+    var dateout = dtout.ToString("dd MMMM yyyy");
     var date = dt.ToString("dd MMMM yyyy");
     get = ViewBag.RoomFilter;
-    <p>Room Available on</p>
-    <p>@date</p>
-    <input type="hidden" value="@dt" id="tanggal">
+    <h3>Room Available on</h3>
+    <h5>@date - @dateout</h5>
   }
   else if(status != "filter"){
     get = ViewBag.Room;
   }
 }
-<br><br>
-        <h2 class="text-center" style="color:#FF5693; font-size:33px">Room List</h2>
+
 <br><br><form method="POST">
    <div class="form-group">
       <div class="text-left">
-        <input type="date" name="date">
+        <label for="datein">Date In</label>
+        <input id="datein" type="date" name="datein">
+        <label for="dateout">Date Out</label>
+        <input id="dateout" type="date" name="dateout">
         <button asp-action="Available" asp-controller="Guest" class="btn btn-success">Check Availability</button>          
       </div>
     </div></form>
@@ -68,13 +82,12 @@
     <td>@a.Description</td>
     <td><button  class="btn btn-success" id="btn-@a.Id" onclick="javascript:Book(this)">Book</button></td>
   </tr> }}} }}
-</table>
+</table> <br><br><br>
 
 <script type="text/javascript">
 function Book(btn)
 {
     var get = btn.id;
-    var date = document.getElementById("tanggal").value;
     Id = get.substring(4,get.Length);
     location.href='/Guest/BookingForm?Id='+Id;
 }

@@ -351,6 +351,7 @@ input[type="file"] {
       <th scope="col">NIP</th>
       <th scope="col">Status</th>
       <th scope="col"></th>
+      <th scope="col"></th>
     </tr>
   </thead>    
     foreach(var a in items) { 
@@ -362,6 +363,7 @@ input[type="file"] {
                 <td class="text-left">@a.Phone</td>
                 <td class="text-left">@a.NIP</td>
                 <td class="text-left">@a.Status</td>
+                <td class="text-center"><a id="btn-@a.Id" onclick="javascript:AccountDetail(this)"><span class="glyphicon glyphicon-chevron-right"></span></a></td>
                 <td class="text-right"><button class="btn btn-success" id="btn-@a.Id" onclick="javascript:Officer(this)">Set as Officer</button>  <button class="btn btn-success" id="btn-@a.Id" onclick="javascript:Admin(this)">Set as Admin</button>  <button class="btn btn-danger" id="btn-@a.Id" onclick="javascript:Remove(this)">Remove</button></td>
             </tr> 
             } 
@@ -382,6 +384,7 @@ input[type="file"] {
       <th scope="col">NIP</th>
       <th scope="col">Status</th>
       <th scope="col"></th>
+      <th scope="col"></th>
     </tr>
   </thead>    
     foreach(var a in items) { 
@@ -393,6 +396,7 @@ input[type="file"] {
                 <td class="text-left">@a.Phone</td>
                 <td class="text-left">@a.NIP</td>
                 <td class="text-left">@a.Status</td>
+                <td class="text-center"><a id="btn-@a.Id" onclick="javascript:AccountDetail(this)"><span class="glyphicon glyphicon-chevron-right"></span></a></td>
                 <td class="text-right"><button class="btn btn-success" id="btn-@a.Id" onclick="javascript:Manager(this)">Set as Manager</button>  <button class="btn btn-success" id="btn-@a.Id" onclick="javascript:Admin(this)">Set as Admin</button>  <button class="btn btn-danger" id="btn-@a.Id" onclick="javascript:Remove(this)">Remove</button></td>
             </tr> 
             } 
@@ -413,6 +417,7 @@ input[type="file"] {
       <th scope="col">NIP</th>
       <th scope="col">Status</th>
       <th scope="col"></th>
+      <th scope="col"></th>
     </tr>
   </thead>    
     foreach(var a in items) { 
@@ -424,6 +429,7 @@ input[type="file"] {
                 <td class="text-left">@a.Phone</td>
                 <td class="text-left">@a.NIP</td>
                 <td class="text-left">@a.Status</td>
+                <td class="text-center"><a id="btn-@a.Id" onclick="javascript:AccountDetail(this)"><span class="glyphicon glyphicon-chevron-right"></span></a></td>
                 <td class="text-right"><button class="btn btn-success" id="btn-@a.Id" onclick="javascript:Manager(this)">Set as Manager</button>  <button class="btn btn-success" id="btn-@a.Id" onclick="javascript:Officer(this)">Set as Officer</button>  <button class="btn btn-danger" id="btn-@a.Id" onclick="javascript:Remove(this)">Remove</button></td>
             </tr> 
             } 
@@ -443,6 +449,7 @@ input[type="file"] {
 </div>
   </div>
 </div>
+<br><br><br>
 
 @* <div class="container">
 <div class="column text-center">
@@ -494,7 +501,7 @@ function Admin(btn)
 
 function Remove(btn)
 {
-     var get = btn.id;
+    var get = btn.id;
     Id = get.substring(4,get.Length);
     location.href='/Admin/Remove?Id='+Id;
 }
@@ -504,6 +511,13 @@ function Search()
     var keyword = document.getElementById("keyword").value;
     console.log(keyword);
     location.href='/Attendance/Search?keyword='+keyword;
+}
+
+function AccountDetail(btn)
+{
+    var get = btn.id;
+    Id = get.substring(4,get.Length);
+    location.href='/Admin/Detail?Id='+Id;
 }
 </script>
 

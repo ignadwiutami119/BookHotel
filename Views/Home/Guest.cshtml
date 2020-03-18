@@ -1,0 +1,89 @@
+@{
+    Layout = "_LayoutGuest";
+}
+
+<style>
+
+  body {
+    background-color: #EBF5FB;
+    }
+</style>
+<br><br>
+@{
+  var guest = ViewBag.Guest;
+}
+
+    <h3 class="text-center" style="color:#FF5693; font-size:33px">Here rooms ready for you</h3>
+<br><br>
+@{var get = ViewBag;
+  var getbooked = ViewBag.RoomBooked;
+  var status = ViewBag.Status;
+  if(status == "filter"){
+    Console.WriteLine("masuk sini ga");
+    var dt = ViewBag.Date;
+    var dtout = ViewBag.Dateout;
+    var dateout = dtout.ToString("dd MMMM yyyy");
+    var date = dt.ToString("dd MMMM yyyy");
+    get = ViewBag.RoomFilter;
+    <h3>Room Available on</h3>
+    <h5>@date - @dateout</h5>
+  }
+  else if(status != "filter"){
+    get = ViewBag.Room;
+  }
+}
+
+<br><br><form method="POST">
+   <div class="form-group">
+      <div class="text-left">
+        <label for="datein">Date In</label>
+        <input id="datein" type="date" name="datein">
+        <label for="dateout">Date Out</label>
+        <input id="dateout" type="date" name="dateout">
+        <button asp-action="Available" asp-controller="Guest" class="btn btn-success">Check Availability</button>          
+      </div>
+    </div></form>
+<table style="background:white; margin-top:5px; padding-left:15px; box-shadow: 1px 1px 10px #5499C7;" class="table table-hover text-left" id="customers">
+<thead class="thead-dark">
+  <tr>
+    <th>Room Number</th>
+    <th>Class</th>
+    <th>Facilities</th>
+    <th>Description</th>
+    <th></th>
+  </tr>
+</thead>
+ @{
+   if(getbooked.Count == 0){
+      foreach (var a in get){
+  <tr>
+    <td>@a.Number</td>
+    <td>@a.Class</td>
+    <td>@a.Facilities</td>
+    <td>@a.Description</td>
+    <td><button  class="btn btn-success" id="btn-@a.Id" onclick="javascript:Book(this)">Book</button></td>
+  </tr> 
+  }}
+
+  else {
+ foreach (var a in get){
+   foreach(var b in getbooked){
+  if(a.Number != b){
+  <tr>
+    <td>@a.Number</td>
+    <td>@a.Class</td>
+    <td>@a.Facilities</td>
+    <td>@a.Description</td>
+    <td><button  class="btn btn-success" id="btn-@a.Id" onclick="javascript:Book(this)">Book</button></td>
+  </tr> }}} }}
+</table>
+
+<script type="text/javascript">
+function Book(btn)
+{
+    var get = btn.id;
+    Id = get.substring(4,get.Length);
+    location.href='/Guest/BookingForm?Id='+Id;
+}
+
+</script>

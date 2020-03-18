@@ -281,7 +281,7 @@
                         <div class="card border-primary rounded-0" style="box-shadow: 1px 1px 10px #5499C7; background:white">
                             <div class="card-header p-0">
                                 <div style="background:#1A5276 ; padding-bottom:18px; padding-top:15px" class="text-center py-2"><p></p>
-                                    <h3 style="color:#F5FBFF  "><b>Add New Room</b></h3>
+                                    <h3 style="color:#F5FBFF  "><b>Edit Room Data</b></h3>
                                     @* <p style="color:#D6EAF8" class="m-0">@Employee.Name</p> *@
                                 </div>
                             </div>
@@ -371,6 +371,61 @@
 
                             }   
 
+                            @{
+                            if(room.Status == "Available")
+                            {
+                            <div class="form-group">
+                                <div class="text-left">
+                                    <label for="class">Class</label>
+                                    <select class="form-control" id="class" name="status">
+                                       <option value="Available" selected>Available</option>
+                                        <option value="In Use">In Use</option>
+                                        <option value="Cleaning">Cleaning</option>
+                                        <option value="Renovation">Renovation</option>
+                                    </select>
+                                </div>
+                            </div>}
+                            else if(room.Status == "In Use")
+                            {
+                            <div class="form-group">
+                                <div class="text-left">
+                                    <label for="class">Class</label>
+                                    <select class="form-control" id="class" name="status">
+                                       <option value="Available">Available</option>
+                                        <option value="In Use"  selected>In Use</option>
+                                        <option value="Cleaning">Cleaning</option>
+                                        <option value="Renovation">Renovation</option>
+                                    </select>
+                                </div>
+                            </div>}
+                            else if(room.Status == "Cleaning")
+                            {
+                            <div class="form-group">
+                                <div class="text-left">
+                                    <label for="class">Class</label>
+                                    <select class="form-control" id="class" name="status">
+                                       <option value="Available">Available</option>
+                                        <option value="In Use">In Use</option>
+                                        <option value="Cleaning"  selected>Cleaning</option>
+                                        <option value="Renovation">Renovation</option>
+                                    </select>
+                                </div>
+                            </div>}
+                            else if(room.Status == "Renovation")
+                            {
+                            <div class="form-group">
+                                <div class="text-left">
+                                    <label for="class">Class</label>
+                                    <select class="form-control" id="class" name="status">
+                                        <option value="Available">Available</option>
+                                        <option value="In Use">In Use</option>
+                                        <option value="Cleaning">Cleaning</option>
+                                        <option value="Renovation" selected>Renovation</option>
+                                    </select>
+                                </div>
+                            </div>}
+                            }
+
 
                             @{  var ac = "";
                                 var tv = "";
@@ -437,6 +492,12 @@
 
                             }
 
+                             <div class="form-group">
+                                    <div class="text-left">
+                                        <label for="class">Price / Night</label>
+                                        <input type="text" class="form-control" name="price" id="desc" value="@room.Price">
+                                    </div>
+                                </div>                                  
                              <div class="form-group">
                                     <div class="text-left">
                                         <label for="class">Description</label>

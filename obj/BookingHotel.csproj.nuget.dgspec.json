@@ -1,25 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "G:\\BookHotel\\BookingHotel.csproj": {}
+    "D:\\Try Out\\BookHotel\\BookingHotel.csproj": {}
   },
   "projects": {
-    "G:\\BookHotel\\BookingHotel.csproj": {
+    "D:\\Try Out\\BookHotel\\BookingHotel.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\BookHotel\\BookingHotel.csproj",
+        "projectUniqueName": "D:\\Try Out\\BookHotel\\BookingHotel.csproj",
         "projectName": "BookingHotel",
-        "projectPath": "G:\\BookHotel\\BookingHotel.csproj",
-        "packagesPath": "C:\\Users\\Igna Dwi Utami\\.nuget\\packages\\",
-        "outputPath": "G:\\BookHotel\\obj\\",
+        "projectPath": "D:\\Try Out\\BookHotel\\BookingHotel.csproj",
+        "packagesPath": "D:\\Users\\bsi50132\\.nuget\\packages\\",
+        "outputPath": "D:\\Try Out\\BookHotel\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Igna Dwi Utami\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "D:\\Users\\bsi50132\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -71,6 +76,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[3.0.2, 3.0.2]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -79,7 +90,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
